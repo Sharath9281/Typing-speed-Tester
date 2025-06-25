@@ -17,6 +17,7 @@ class TypingTest {
     initializeElements() {
         this.textDisplay = document.getElementById('text-display');
         this.startBtn = document.getElementById('start-btn');
+        this.endBtn = document.getElementById('end-btn');
         this.resetBtn = document.getElementById('reset-btn');
         this.timerDisplay = document.getElementById('timer');
         this.wpmDisplay = document.getElementById('wpm');
@@ -27,6 +28,7 @@ class TypingTest {
     
     bindEvents() {
         this.startBtn.addEventListener('click', () => this.startTest());
+        this.endBtn.addEventListener('click', () => this.endTest());
         this.resetBtn.addEventListener('click', () => this.resetTest());
         this.textDisplay.addEventListener('click', () => this.focusTextDisplay());
         this.textDisplay.addEventListener('keydown', (e) => this.handleKeyDown(e));
@@ -40,9 +42,11 @@ class TypingTest {
     
     async loadNewParagraph() {
         try {
-            // Reset text display height to show loading
+            // Reset text display for loading
             this.textDisplay.style.height = '120px';
             this.textDisplay.style.display = 'flex';
+            this.textDisplay.style.alignItems = 'center';
+            this.textDisplay.style.justifyContent = 'center';
             this.textDisplay.innerHTML = `
                 <div class="loading text-center py-5">
                     <i class="fas fa-spinner fa-spin fa-2x text-primary"></i>
@@ -67,6 +71,11 @@ class TypingTest {
     }
     
     displayText() {
+        // Reset display styles for proper text rendering
+        this.textDisplay.style.display = 'block';
+        this.textDisplay.style.alignItems = 'unset';
+        this.textDisplay.style.justifyContent = 'unset';
+        
         const chars = this.originalText.split('').map((char, index) => {
             return `<span class="char" data-index="${index}">${char === ' ' ? '&nbsp;' : char === '\n' ? '<br>' : char}</span>`;
         }).join('');
@@ -116,8 +125,10 @@ class TypingTest {
         this.isTestComplete = false;
         this.startTime = new Date();
         this.textDisplay.focus();
-        this.startBtn.disabled = true;
-        this.startBtn.innerHTML = '<i class="fas fa-keyboard me-2"></i>Test in Progress...';
+        
+        // Update button states
+        this.startBtn.style.display = 'none';
+        this.endBtn.style.display = 'inline-block';
         
         this.startTimer();
     }
@@ -260,33 +271,59 @@ class TypingTest {
         
         clearInterval(this.timer);
         this.textDisplay.blur();
-        this.startBtn.disabled = false;
-        this.startBtn.innerHTML = '<i class="fas fa-play me-2"></i>Start Test';
+        
+        // Update button states
+        this.startBtn.style.display = 'inline-block';
+        this.endBtn.style.display = 'none';
+        
+        this.showResults();
+    }
+    
+    endTest() {
+        if (!this.isTestActive) return;
+        
+        this.isTestActive = false;
+        this.isTestComplete = true;
+        this.endTime = new Date();
+        
+        clearInterval(this.timer);
+        this.textDisplay.blur();
+        
+        // Update button states
+        this.startBtn.style.display = 'inline-block';
+        this.endBtn.style.display = 'none';
         
         this.showResults();
     }
     
     showResults() {
         const totalTime = (this.endTime - this.startTime) / 1000;
-        const wordsTyped = this.userInput.trim().split(' ').length;
-        const wpm = Math.round(wordsTyped / (totalTime / 60));
         
+        // Calculate words per minute based on typed characters
+        const typedWords = this.userInput.trim().split(/\s+/).filter(word => word.length > 0).length;
+        const wpm = totalTime > 0 ? Math.round(typedWords / (totalTime / 60)) : 0;
+        
+        // Calculate accuracy based on correctly typed characters
         let correctChars = 0;
-        const typedLength = Math.min(this.userInput.length, this.originalText.length);
+        const typedLength = this.userInput.length;
         
-        for (let i = 0; i < typedLength; i++) {
+        for (let i = 0; i < typedLength && i < this.originalText.length; i++) {
             if (this.userInput[i] === this.originalText[i]) {
                 correctChars++;
             }
         }
         
+        // Calculate accuracy percentage
         const accuracy = typedLength > 0 ? Math.round((correctChars / typedLength) * 100) : 100;
+        
+        // Calculate completion percentage
+        const completionPercentage = Math.round((typedLength / this.originalText.length) * 100);
         
         // Update modal content
         document.getElementById('final-wpm').textContent = wpm;
         document.getElementById('final-accuracy').textContent = accuracy + '%';
         document.getElementById('final-time').textContent = Math.round(totalTime);
-        document.getElementById('final-chars').textContent = this.userInput.length;
+        document.getElementById('final-chars').textContent = `${typedLength} / ${this.originalText.length} (${completionPercentage}%)`;
         
         // Show modal
         this.resultsModal.show();
@@ -303,8 +340,10 @@ class TypingTest {
         clearInterval(this.timer);
         
         this.textDisplay.blur();
-        this.startBtn.disabled = false;
-        this.startBtn.innerHTML = '<i class="fas fa-play me-2"></i>Start Test';
+        
+        // Reset button states
+        this.startBtn.style.display = 'inline-block';
+        this.endBtn.style.display = 'none';
         
         this.resetStats();
         this.loadNewParagraph();

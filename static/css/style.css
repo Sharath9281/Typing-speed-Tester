@@ -107,11 +107,9 @@ header p {
     white-space: pre-wrap;
     width: 100%;
     box-sizing: border-box;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    overflow: hidden;
+    display: block;
+    text-align: left;
+    overflow: visible;
 }
 
 .text-to-type:focus {
@@ -227,6 +225,20 @@ header p {
     color: var(--bg-primary);
     transform: translateY(-2px);
     box-shadow: 0 4px 15px rgba(255,255,255,0.2);
+}
+
+.btn-warning {
+    background: linear-gradient(45deg, #ff6b35, #f7931e);
+    border: 1px solid #ff6b35;
+    color: var(--bg-primary);
+    text-shadow: none;
+}
+
+.btn-warning:hover {
+    background: linear-gradient(45deg, #ff8c42, #ffb347);
+    color: var(--bg-primary);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(255, 107, 53, 0.4);
 }
 
 /* Instructions Card */
