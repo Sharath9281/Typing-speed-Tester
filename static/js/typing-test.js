@@ -77,7 +77,7 @@ class TypingTest {
         this.textDisplay.style.justifyContent = 'unset';
         
         const chars = this.originalText.split('').map((char, index) => {
-            return `<span class="char" data-index="${index}">${char === ' ' ? '&nbsp;' : char === '\n' ? '<br>' : char}</span>`;
+            return `<span class="char" data-index="${index}">${char === ' ' ? '&nbsp;' : char}</span>`;
         }).join('');
         
         this.textDisplay.innerHTML = chars;
@@ -100,16 +100,12 @@ class TypingTest {
         const paddingBottom = parseFloat(computedStyle.paddingBottom);
         const totalPadding = paddingTop + paddingBottom;
         
-        // Calculate optimal height for exactly two lines
-        const lineHeight = parseFloat(computedStyle.lineHeight);
-        const twoLineHeight = lineHeight * 2;
-        
-        // Use the larger of content height or two-line height, plus padding
-        const optimalHeight = Math.max(contentHeight, twoLineHeight) + totalPadding + 20;
+        // Calculate optimal height to fit content with some extra space
+        const optimalHeight = contentHeight + totalPadding + 30;
         
         // Set constraints for minimum and maximum heights
-        const minHeight = 120;
-        const maxHeight = 180;
+        const minHeight = 100;
+        const maxHeight = 160;
         
         // Apply the calculated height within constraints
         const finalHeight = Math.max(minHeight, Math.min(maxHeight, optimalHeight));
@@ -293,10 +289,10 @@ class TypingTest {
         this.startBtn.style.display = 'inline-block';
         this.endBtn.style.display = 'none';
         
-        this.showResults();
+        this.showResults(true); // Pass true to indicate manual end
     }
     
-    showResults() {
+    showResults(autoLoadNew = false) {
         const totalTime = (this.endTime - this.startTime) / 1000;
         
         // Calculate words per minute based on typed characters
@@ -325,8 +321,16 @@ class TypingTest {
         document.getElementById('final-time').textContent = Math.round(totalTime);
         document.getElementById('final-chars').textContent = `${typedLength} / ${this.originalText.length} (${completionPercentage}%)`;
         
-        // Show modal
+        // Show modal and auto-load new paragraph if requested
         this.resultsModal.show();
+        
+        if (autoLoadNew) {
+            // Auto-close modal after 3 seconds and load new paragraph
+            setTimeout(() => {
+                this.resultsModal.hide();
+                this.resetTest();
+            }, 3000);
+        }
     }
     
     resetTest() {

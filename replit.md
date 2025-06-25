@@ -85,6 +85,14 @@ The application follows a simple client-server architecture:
 
 ## Recent Changes
 
+- **June 25, 2025**: Enhanced End Test functionality and paragraph display
+  - Added "End Test" button that appears during active typing
+  - Implemented automatic score display after ending test manually
+  - Auto-generates new paragraph after showing results (3-second delay)
+  - Changed to single-line paragraphs (two sentences) for better display
+  - Improved text box sizing to show entire paragraph clearly
+  - Enhanced results modal with completion percentage tracking
+
 - **June 25, 2025**: Dynamic text box sizing and two-line sentence format
   - Updated sentences to display in exactly two lines with line breaks
   - Made text box height dynamic based on content length
