@@ -27,10 +27,10 @@ The application follows a simple client-server architecture:
    - `/api/paragraph` - REST API endpoint returning random paragraphs in JSON format
 
 3. **Paragraph Service** (`routes.py`)
-   - Integration with OpenAI GPT-3.5-turbo for dynamic paragraph generation
-   - Generates random two-sentence paragraphs with varied topics for each typing session
-   - Fallback system with predefined paragraph if API fails
-   - Uses OpenAI Chat Completions API for intelligent text generation
+   - Integration with Bacon Ipsum API for dynamic paragraph generation
+   - Generates random two-sentence paragraphs for each typing session
+   - Robust fallback system with 10 predefined paragraphs if API fails
+   - API endpoint: https://baconipsum.com/api/?type=all-meat&paras=1&sentences=2
 
 ### Frontend Components
 
@@ -86,10 +86,10 @@ The application follows a simple client-server architecture:
 
 ## Recent Changes
 
-- **June 25, 2025**: Integrated OpenAI GPT-3.5-turbo for intelligent paragraph generation
-  - Replaced Bacon Ipsum API with OpenAI for more varied and intelligent content
-  - Each typing session generates unique random paragraphs with diverse topics
-  - Added proper error handling and fallback system for API reliability
+- **June 25, 2025**: Integrated Bacon Ipsum API for dynamic paragraph generation
+  - Replaced static paragraph list with live API calls for fresh content
+  - Each typing session gets a unique random paragraph with consistent two-sentence format
+  - Enhanced fallback system with 10 varied paragraphs for API reliability
   - Removed shiny text effects for cleaner appearance
   - Implemented fully dynamic text box sizing based on generated content length
   - Text box automatically adjusts from 80px to 250px based on paragraph size
