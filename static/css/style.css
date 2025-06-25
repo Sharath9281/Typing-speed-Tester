@@ -90,13 +90,13 @@ header p {
 
 .text-to-type {
     font-family: 'JetBrains Mono', monospace;
-    font-size: 1.2rem;
-    line-height: 1.8;
+    font-size: 1.5rem;
+    line-height: 2.2;
     padding: 1.5rem;
     background: linear-gradient(145deg, #0d0d0d, #1a1a1a);
     border-radius: 10px;
     border: 1px solid var(--border-color);
-    min-height: 120px;
+    height: 140px;
     position: relative;
     cursor: text;
     outline: none;
@@ -105,6 +105,10 @@ header p {
     overflow-wrap: break-word;
     white-space: pre-wrap;
     max-width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
 }
 
 .text-to-type:focus {
