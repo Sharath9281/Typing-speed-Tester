@@ -1,36 +1,36 @@
 import random
 
-# Collection of two-line paragraphs for typing practice
+# Collection of perfectly sized two-line paragraphs for typing practice
 PARAGRAPHS = [
-    "The quick brown fox jumps over the lazy dog.\nThis sentence contains all letters of the alphabet.",
+    "The quick brown fox jumps over the lazy dog.\nThis pangram contains every letter perfectly.",
     
-    "Technology shapes our daily lives in amazing ways.\nFrom smartphones to AI, innovation never stops.",
+    "Technology shapes our modern world every day.\nInnovation never stops moving forward rapidly.",
     
-    "Reading books expands knowledge and thinking skills.\nEvery page turns into a new adventure.",
+    "Reading books expands knowledge and skills.\nEvery page opens new adventures ahead.",
     
-    "Climate change requires urgent global action today.\nWe must protect our planet for future generations.",
+    "Climate change needs urgent action now.\nWe must protect our beautiful planet.",
     
-    "Cooking combines creativity, science, and tradition.\nEvery recipe tells a unique cultural story.",
+    "Cooking combines art, science, and tradition.\nEvery recipe tells cultural stories.",
     
-    "Regular exercise keeps both body and mind healthy.\nDaily movement boosts energy and improves mood.",
+    "Exercise keeps both body and mind healthy.\nDaily movement boosts energy levels.",
     
-    "Music connects people across all language barriers.\nRhythms and melodies speak to every soul.",
+    "Music connects people across all barriers.\nRhythms speak to every human soul.",
     
-    "Education opens doors to endless new opportunities.\nLearning builds the foundation for success.",
+    "Education opens doors to new opportunities.\nLearning builds success foundations.",
     
-    "The internet transformed how we share information.\nGlobal networks connect minds across the world.",
+    "Internet transformed global information sharing.\nNetworks connect minds across continents.",
     
-    "Photography captures precious moments in time forever.\nEach image preserves memories for generations.",
+    "Photography captures precious life moments.\nImages preserve memories for generations.",
     
-    "Space exploration expands human knowledge boundaries.\nWe discover new worlds beyond our planet.",
+    "Space exploration expands human knowledge.\nWe discover amazing worlds beyond Earth.",
     
-    "Good communication builds stronger relationships daily.\nListening and speaking clearly creates connections.",
+    "Communication builds stronger relationships.\nListening creates meaningful connections.",
     
-    "Conservation protects our planet for future generations.\nSmall actions today make big differences tomorrow.",
+    "Conservation protects our future planet.\nSmall actions make big differences.",
     
-    "Innovation drives progress throughout human civilization.\nCreative thinking solves complex global problems.",
+    "Innovation drives civilization progress forward.\nCreative thinking solves complex problems.",
     
-    "Travel creates memories and broadens life perspectives.\nNew cultures teach us about diversity."
+    "Travel broadens life perspectives greatly.\nNew cultures teach valuable lessons."
 ]
 
 def get_random_paragraph():

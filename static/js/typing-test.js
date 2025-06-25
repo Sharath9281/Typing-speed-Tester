@@ -40,6 +40,9 @@ class TypingTest {
     
     async loadNewParagraph() {
         try {
+            // Reset text display height to show loading
+            this.textDisplay.style.height = '120px';
+            this.textDisplay.style.display = 'flex';
             this.textDisplay.innerHTML = `
                 <div class="loading text-center py-5">
                     <i class="fas fa-spinner fa-spin fa-2x text-primary"></i>
@@ -74,21 +77,36 @@ class TypingTest {
     }
     
     adjustBoxHeight() {
-        // Reset height to auto to measure content
+        // Temporarily reset styles to measure content naturally
         this.textDisplay.style.height = 'auto';
+        this.textDisplay.style.minHeight = 'auto';
         
-        // Get the natural height of the content
+        // Force a reflow to get accurate measurements
+        this.textDisplay.offsetHeight;
+        
+        // Get the natural height needed for the content
         const contentHeight = this.textDisplay.scrollHeight;
+        const computedStyle = window.getComputedStyle(this.textDisplay);
+        const paddingTop = parseFloat(computedStyle.paddingTop);
+        const paddingBottom = parseFloat(computedStyle.paddingBottom);
+        const totalPadding = paddingTop + paddingBottom;
         
-        // Set minimum and maximum constraints
-        const minHeight = 100;
-        const maxHeight = 200;
+        // Calculate optimal height for exactly two lines
+        const lineHeight = parseFloat(computedStyle.lineHeight);
+        const twoLineHeight = lineHeight * 2;
         
-        // Calculate the appropriate height with padding
-        const newHeight = Math.max(minHeight, Math.min(maxHeight, contentHeight + 40));
+        // Use the larger of content height or two-line height, plus padding
+        const optimalHeight = Math.max(contentHeight, twoLineHeight) + totalPadding + 20;
         
-        // Apply the calculated height
-        this.textDisplay.style.height = newHeight + 'px';
+        // Set constraints for minimum and maximum heights
+        const minHeight = 120;
+        const maxHeight = 180;
+        
+        // Apply the calculated height within constraints
+        const finalHeight = Math.max(minHeight, Math.min(maxHeight, optimalHeight));
+        
+        this.textDisplay.style.height = finalHeight + 'px';
+        this.textDisplay.style.minHeight = finalHeight + 'px';
     }
     
     startTest() {
