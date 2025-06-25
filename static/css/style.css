@@ -325,6 +325,23 @@ header p {
     letter-spacing: 0.5px;
 }
 
+/* Instruction text styling */
+.lead {
+    font-size: 1.4rem !important;
+    font-weight: 600 !important;
+    color: #ffffff !important;
+    text-shadow: 0 0 15px rgba(255,255,255,0.8), 0 0 30px rgba(255,255,255,0.4) !important;
+    margin-bottom: 2rem !important;
+}
+
+.instruction-text p {
+    font-size: 1.2rem !important;
+    font-weight: 500 !important;
+    color: #ffffff !important;
+    text-shadow: 0 0 12px rgba(255,255,255,0.7), 0 0 25px rgba(255,255,255,0.3) !important;
+    margin: 0 !important;
+}
+
 /* Loading animation */
 .loading {
     display: flex;
@@ -371,10 +388,14 @@ header p {
     
     .lead {
         font-size: 1.2rem !important;
+        color: #ffffff !important;
+        text-shadow: 0 0 12px rgba(255,255,255,0.7), 0 0 25px rgba(255,255,255,0.3) !important;
     }
     
     .instruction-text p {
         font-size: 1.1rem !important;
+        color: #ffffff !important;
+        text-shadow: 0 0 10px rgba(255,255,255,0.6), 0 0 20px rgba(255,255,255,0.2) !important;
     }
     
     .typing-area {
@@ -406,10 +427,14 @@ header p {
     
     .lead {
         font-size: 1.1rem !important;
+        color: #ffffff !important;
+        text-shadow: 0 0 10px rgba(255,255,255,0.6), 0 0 20px rgba(255,255,255,0.2) !important;
     }
     
     .instruction-text p {
         font-size: 1rem !important;
+        color: #ffffff !important;
+        text-shadow: 0 0 8px rgba(255,255,255,0.5), 0 0 16px rgba(255,255,255,0.2) !important;
     }
     
     .instructions-card,
