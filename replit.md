@@ -91,7 +91,8 @@ The application follows a simple client-server architecture:
   - Each typing session now gets a unique random paragraph
   - Added fallback system for API reliability
   - Removed shiny text effects for cleaner appearance
-  - Maintained two-sentence paragraph format
+  - Implemented fully dynamic text box sizing based on API content length
+  - Text box automatically adjusts from 80px to 250px based on paragraph size
 
 - **June 25, 2025**: Enhanced End Test functionality and paragraph display
   - Added "End Test" button that appears during active typing

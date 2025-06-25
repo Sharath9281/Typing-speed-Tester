@@ -42,8 +42,9 @@ class TypingTest {
     
     async loadNewParagraph() {
         try {
-            // Reset text display for loading
+            // Reset text display for loading with initial height
             this.textDisplay.style.height = '120px';
+            this.textDisplay.style.minHeight = '120px';
             this.textDisplay.style.display = 'flex';
             this.textDisplay.style.alignItems = 'center';
             this.textDisplay.style.justifyContent = 'center';
@@ -61,6 +62,8 @@ class TypingTest {
             this.resetStats();
         } catch (error) {
             console.error('Error loading paragraph:', error);
+            this.textDisplay.style.height = '120px';
+            this.textDisplay.style.minHeight = '120px';
             this.textDisplay.innerHTML = `
                 <div class="text-center py-5">
                     <i class="fas fa-exclamation-triangle fa-2x text-warning"></i>
@@ -86,28 +89,51 @@ class TypingTest {
     }
     
     adjustBoxHeight() {
-        // Temporarily reset styles to measure content naturally
-        this.textDisplay.style.height = 'auto';
-        this.textDisplay.style.minHeight = 'auto';
-        
-        // Force a reflow to get accurate measurements
-        this.textDisplay.offsetHeight;
+        // Create a temporary element to measure text height accurately
+        const tempElement = document.createElement('div');
+        tempElement.style.cssText = `
+            position: absolute;
+            visibility: hidden;
+            white-space: normal;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            font-family: ${window.getComputedStyle(this.textDisplay).fontFamily};
+            font-size: ${window.getComputedStyle(this.textDisplay).fontSize};
+            line-height: ${window.getComputedStyle(this.textDisplay).lineHeight};
+            width: ${this.textDisplay.offsetWidth - 64}px;
+            padding: 2rem;
+        `;
+        tempElement.textContent = this.originalText;
+        document.body.appendChild(tempElement);
         
         // Get the natural height needed for the content
-        const contentHeight = this.textDisplay.scrollHeight;
-        const computedStyle = window.getComputedStyle(this.textDisplay);
-        const paddingTop = parseFloat(computedStyle.paddingTop);
-        const paddingBottom = parseFloat(computedStyle.paddingBottom);
-        const totalPadding = paddingTop + paddingBottom;
+        const contentHeight = tempElement.offsetHeight;
         
-        // Calculate optimal height to fit content with some extra space
-        const optimalHeight = contentHeight + totalPadding + 30;
+        // Clean up temporary element
+        document.body.removeChild(tempElement);
         
-        // Set constraints for minimum and maximum heights
-        const minHeight = 100;
-        const maxHeight = 160;
+        // Calculate optimal height with some breathing room
+        const optimalHeight = contentHeight + 40;
         
-        // Apply the calculated height within constraints
+        // Set dynamic constraints based on content length
+        const textLength = this.originalText.length;
+        let minHeight, maxHeight;
+        
+        if (textLength < 100) {
+            minHeight = 80;
+            maxHeight = 120;
+        } else if (textLength < 150) {
+            minHeight = 100;
+            maxHeight = 150;
+        } else if (textLength < 200) {
+            minHeight = 120;
+            maxHeight = 180;
+        } else {
+            minHeight = 140;
+            maxHeight = 220;
+        }
+        
+        // Apply the calculated height within dynamic constraints
         const finalHeight = Math.max(minHeight, Math.min(maxHeight, optimalHeight));
         
         this.textDisplay.style.height = finalHeight + 'px';

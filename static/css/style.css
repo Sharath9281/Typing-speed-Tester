@@ -96,12 +96,12 @@ header p {
     background: linear-gradient(145deg, #0d0d0d, #1a1a1a);
     border-radius: 10px;
     border: 1px solid var(--border-color);
-    min-height: 100px;
-    max-height: 160px;
+    min-height: 80px;
+    max-height: 250px;
     position: relative;
     cursor: text;
     outline: none;
-    transition: border-color 0.3s ease, height 0.3s ease, min-height 0.3s ease;
+    transition: border-color 0.3s ease, height 0.4s ease, min-height 0.4s ease;
     word-wrap: break-word;
     overflow-wrap: break-word;
     white-space: normal;
@@ -380,8 +380,8 @@ header p {
         font-size: 1.2rem;
         padding: 1.5rem;
         line-height: 1.7;
-        min-height: 100px;
-        max-height: 150px;
+        min-height: 70px;
+        max-height: 200px;
     }
     
     .lead {
@@ -417,8 +417,8 @@ header p {
         font-size: 1rem;
         padding: 1rem;
         line-height: 1.5;
-        min-height: 90px;
-        max-height: 130px;
+        min-height: 60px;
+        max-height: 160px;
     }
     
     .lead {
