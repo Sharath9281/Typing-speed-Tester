@@ -85,6 +85,13 @@ The application follows a simple client-server architecture:
 
 ## Recent Changes
 
+- **June 25, 2025**: Dynamic text box sizing and two-line sentence format
+  - Updated sentences to display in exactly two lines with line breaks
+  - Made text box height dynamic based on content length
+  - Improved text wrapping and responsive design
+  - Enhanced readability with better font sizing
+  - Text box now automatically adjusts between 100px and 200px height
+
 - **June 25, 2025**: Complete UI overhaul with black and white shiny theme
   - Shortened paragraph length for better usability (single sentences)
   - Implemented black/white gradient theme with shiny effects

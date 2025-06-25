@@ -65,11 +65,30 @@ class TypingTest {
     
     displayText() {
         const chars = this.originalText.split('').map((char, index) => {
-            return `<span class="char" data-index="${index}">${char === ' ' ? '&nbsp;' : char}</span>`;
+            return `<span class="char" data-index="${index}">${char === ' ' ? '&nbsp;' : char === '\n' ? '<br>' : char}</span>`;
         }).join('');
         
         this.textDisplay.innerHTML = chars;
+        this.adjustBoxHeight();
         this.updateCurrentChar();
+    }
+    
+    adjustBoxHeight() {
+        // Reset height to auto to measure content
+        this.textDisplay.style.height = 'auto';
+        
+        // Get the natural height of the content
+        const contentHeight = this.textDisplay.scrollHeight;
+        
+        // Set minimum and maximum constraints
+        const minHeight = 100;
+        const maxHeight = 200;
+        
+        // Calculate the appropriate height with padding
+        const newHeight = Math.max(minHeight, Math.min(maxHeight, contentHeight + 40));
+        
+        // Apply the calculated height
+        this.textDisplay.style.height = newHeight + 'px';
     }
     
     startTest() {
