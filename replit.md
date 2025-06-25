@@ -26,10 +26,11 @@ The application follows a simple client-server architecture:
    - `/` - Main typing test page (renders HTML template)
    - `/api/paragraph` - REST API endpoint returning random paragraphs in JSON format
 
-3. **Paragraph Service** (`paragraphs.py`)
-   - Collection of 15 predefined typing practice paragraphs
-   - Random paragraph selection functionality
-   - Content covers various topics (technology, education, environment, etc.)
+3. **Paragraph Service** (`routes.py`)
+   - Integration with Bacon Ipsum API for dynamic paragraph generation
+   - Generates random two-sentence paragraphs for each typing session
+   - Fallback system with predefined paragraph if API fails
+   - API endpoint: https://baconipsum.com/api/?type=all-meat&paras=1&sentences=2
 
 ### Frontend Components
 
@@ -84,6 +85,13 @@ The application follows a simple client-server architecture:
 - Implement user authentication for personalized features
 
 ## Recent Changes
+
+- **June 25, 2025**: Integrated dynamic paragraph generation with Bacon Ipsum API
+  - Replaced static paragraph list with live API calls
+  - Each typing session now gets a unique random paragraph
+  - Added fallback system for API reliability
+  - Removed shiny text effects for cleaner appearance
+  - Maintained two-sentence paragraph format
 
 - **June 25, 2025**: Enhanced End Test functionality and paragraph display
   - Added "End Test" button that appears during active typing
