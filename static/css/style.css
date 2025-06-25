@@ -369,6 +369,14 @@ header p {
         max-height: 150px;
     }
     
+    .lead {
+        font-size: 1.2rem !important;
+    }
+    
+    .instruction-text p {
+        font-size: 1.1rem !important;
+    }
+    
     .typing-area {
         padding: 1.5rem;
     }
@@ -394,6 +402,14 @@ header p {
         line-height: 1.5;
         min-height: 90px;
         max-height: 130px;
+    }
+    
+    .lead {
+        font-size: 1.1rem !important;
+    }
+    
+    .instruction-text p {
+        font-size: 1rem !important;
     }
     
     .instructions-card,
