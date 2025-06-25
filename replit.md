@@ -85,6 +85,14 @@ The application follows a simple client-server architecture:
 
 ## Recent Changes
 
+- **June 25, 2025**: Complete UI overhaul with black and white shiny theme
+  - Shortened paragraph length for better usability (single sentences)
+  - Implemented black/white gradient theme with shiny effects
+  - Improved text wrapping and container sizing
+  - Enhanced button visibility and contrast
+  - Added glowing text effects and shadows throughout interface
+  - Fixed responsive design issues
+
 - **June 25, 2025**: Modified typing interface to direct text interaction
   - Removed separate textarea input field
   - Users now type directly on the paragraph text
