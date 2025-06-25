@@ -83,9 +83,20 @@ The application follows a simple client-server architecture:
 - Consider adding database for user progress tracking
 - Implement user authentication for personalized features
 
+## Recent Changes
+
+- **June 25, 2025**: Modified typing interface to direct text interaction
+  - Removed separate textarea input field
+  - Users now type directly on the paragraph text
+  - Text starts in dull gray color
+  - Correct letters turn black when typed correctly
+  - Incorrect letters glow red with animation effect
+  - Improved user experience with direct text manipulation
+
 ## Changelog
 
 - June 25, 2025. Initial setup
+- June 25, 2025. Updated to direct text typing interface
 
 ## User Preferences
 

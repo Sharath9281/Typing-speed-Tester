@@ -16,7 +16,6 @@ class TypingTest {
     
     initializeElements() {
         this.textDisplay = document.getElementById('text-display');
-        this.typingInput = document.getElementById('typing-input');
         this.startBtn = document.getElementById('start-btn');
         this.resetBtn = document.getElementById('reset-btn');
         this.timerDisplay = document.getElementById('timer');
@@ -29,9 +28,14 @@ class TypingTest {
     bindEvents() {
         this.startBtn.addEventListener('click', () => this.startTest());
         this.resetBtn.addEventListener('click', () => this.resetTest());
-        this.typingInput.addEventListener('input', (e) => this.handleInput(e));
-        this.typingInput.addEventListener('keydown', (e) => this.handleKeyDown(e));
-        this.typingInput.addEventListener('focus', () => this.handleFocus());
+        this.textDisplay.addEventListener('click', () => this.focusTextDisplay());
+        this.textDisplay.addEventListener('keydown', (e) => this.handleKeyDown(e));
+        this.textDisplay.addEventListener('focus', () => this.handleFocus());
+        this.textDisplay.addEventListener('blur', () => this.handleBlur());
+        
+        // Prevent default text selection and editing
+        this.textDisplay.addEventListener('selectstart', (e) => e.preventDefault());
+        this.textDisplay.addEventListener('mousedown', (e) => e.preventDefault());
     }
     
     async loadNewParagraph() {
@@ -74,12 +78,27 @@ class TypingTest {
         this.isTestActive = true;
         this.isTestComplete = false;
         this.startTime = new Date();
-        this.typingInput.disabled = false;
-        this.typingInput.focus();
+        this.textDisplay.focus();
         this.startBtn.disabled = true;
         this.startBtn.innerHTML = '<i class="fas fa-keyboard me-2"></i>Test in Progress...';
         
         this.startTimer();
+    }
+    
+    focusTextDisplay() {
+        if (!this.isTestActive && this.originalText && !this.isTestComplete) {
+            this.startTest();
+        }
+        this.textDisplay.focus();
+    }
+    
+    handleBlur() {
+        // Keep focus on text display during active test
+        if (this.isTestActive && !this.isTestComplete) {
+            setTimeout(() => {
+                this.textDisplay.focus();
+            }, 10);
+        }
     }
     
     startTimer() {
@@ -92,11 +111,20 @@ class TypingTest {
         }, 100);
     }
     
-    handleInput(e) {
+    handleInput(inputChar) {
         if (!this.isTestActive) return;
         
-        this.userInput = e.target.value;
-        this.currentIndex = this.userInput.length;
+        // Handle backspace
+        if (inputChar === 'Backspace') {
+            if (this.userInput.length > 0) {
+                this.userInput = this.userInput.slice(0, -1);
+                this.currentIndex = this.userInput.length;
+            }
+        } else if (inputChar.length === 1) {
+            // Handle regular character input
+            this.userInput += inputChar;
+            this.currentIndex = this.userInput.length;
+        }
         
         this.updateDisplay();
         this.updateStats();
@@ -109,18 +137,21 @@ class TypingTest {
     handleKeyDown(e) {
         if (!this.isTestActive) return;
         
-        // Prevent certain keys that might interfere with the test
-        if (e.key === 'Tab') {
-            e.preventDefault();
+        // Prevent default behavior for most keys
+        e.preventDefault();
+        
+        // Handle special keys
+        if (e.key === 'Tab' || e.key === 'Enter') {
+            return;
         }
+        
+        // Handle input
+        this.handleInput(e.key);
     }
     
     handleFocus() {
-        if (!this.isTestActive && this.originalText) {
-            // Auto-start test when user focuses on input (after paragraph is loaded)
-            if (!this.isTestComplete) {
-                this.startTest();
-            }
+        if (!this.isTestActive && this.originalText && !this.isTestComplete) {
+            this.startTest();
         }
     }
     
@@ -191,7 +222,7 @@ class TypingTest {
         this.endTime = new Date();
         
         clearInterval(this.timer);
-        this.typingInput.disabled = true;
+        this.textDisplay.blur();
         this.startBtn.disabled = false;
         this.startBtn.innerHTML = '<i class="fas fa-play me-2"></i>Start Test';
         
@@ -234,8 +265,7 @@ class TypingTest {
         
         clearInterval(this.timer);
         
-        this.typingInput.value = '';
-        this.typingInput.disabled = true;
+        this.textDisplay.blur();
         this.startBtn.disabled = false;
         this.startBtn.innerHTML = '<i class="fas fa-play me-2"></i>Start Test';
         

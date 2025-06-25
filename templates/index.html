@@ -44,21 +44,15 @@
 
     <!-- Typing Area -->
     <div class="typing-area mb-4">
-        <div class="text-to-type" id="text-display">
+        <div class="text-to-type" id="text-display" tabindex="0">
             <div class="loading text-center py-5">
                 <i class="fas fa-spinner fa-spin fa-2x text-primary"></i>
                 <p class="mt-3 text-muted">Loading paragraph...</p>
             </div>
         </div>
         
-        <div class="input-area mt-4">
-            <textarea 
-                id="typing-input" 
-                class="form-control typing-input" 
-                placeholder="Click here and start typing when ready..."
-                rows="4"
-                disabled
-            ></textarea>
+        <div class="instruction-text mt-3 text-center">
+            <p class="text-muted">Click on the text above and start typing to begin the test</p>
         </div>
     </div>
 
@@ -76,10 +70,10 @@
     <div class="instructions-card">
         <h5><i class="fas fa-info-circle me-2"></i>Instructions</h5>
         <ul class="mb-0">
-            <li>Click "Start Test" to begin</li>
-            <li>Type the displayed text as accurately and quickly as possible</li>
-            <li>Correct characters will be highlighted in green, errors in red</li>
-            <li>Your WPM and accuracy will be calculated in real-time</li>
+            <li>Click on the paragraph text to start typing</li>
+            <li>Type directly on the text - letters start dull gray</li>
+            <li>Correct letters turn black, incorrect letters glow red</li>
+            <li>Your WPM and accuracy are calculated in real-time</li>
             <li>Complete the entire paragraph to see your final results</li>
         </ul>
     </div>
