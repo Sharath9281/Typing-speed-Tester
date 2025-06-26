@@ -51,7 +51,7 @@ This project demonstrates core web development skills, including frontend-backen
 ---
 
 ## Project Structure
-
+```bash
 typing-speed-test/
 ├── app.py # Main Flask application file
 ├── requirements.txt # Project dependencies
@@ -63,7 +63,7 @@ typing-speed-test/
 │ └── js/
 │ └── typing-test.js # JavaScript for typing logic and interactivity
 └── README.md # Project documentation
-
+```
 
 ---
 
