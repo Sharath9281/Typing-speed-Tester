@@ -89,3 +89,37 @@ Creating a virtual environment keeps your project dependencies isolated and mana
   ```bash
   python -m venv venv
   venv\Scripts\activate
+  ```
+- **On macOS/Linux:**
+   ```bash
+  python3 -m venv venv
+  source venv/bin/activate
+   ```
+### Step 3: Install Dependencies
+
+With the virtual environment activated, install the required packages using:
+```bash
+pip install -r requirements.txt
+```
+###Step 4: Run the Flask Application
+
+Start your Flask development server by running:
+
+```bash
+python app.py
+```
+You should see output similar to:
+```csharp
+ * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+```
+###Step 5: Access the Application
+
+Open your web browser and navigate to:
+```cpp
+http://127.0.0.1:5000
+```
+```yaml
+---
+
+Let me know if you want me to provide the **full README** including these steps, or any other sections!
+```
