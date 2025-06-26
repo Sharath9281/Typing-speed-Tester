@@ -79,16 +79,13 @@ typing-speed-test/
 ```bash
 git clone https://github.com/your-username/typing-speed-test.git
 cd typing-speed-test
+```
+### Step 2: Create and Activate a Virtual Environment (Recommended)
 
+Creating a virtual environment keeps your project dependencies isolated and manageable.
 
----
+- **On Windows (Command Prompt):**
 
-### How to use:
-
-- Replace all instances of `your-username` and `your.email@example.com` with your actual GitHub username and email.
-- Add a `LICENSE` file if you want to include licensing (MIT recommended).
-- Add a live demo link if you deploy it somewhere online.
-
----
-
-If you want, I can help generate the **LICENSE file**, or even help you create badges and a screenshot section for the README. Just ask!
+  ```bash
+  python -m venv venv
+  venv\Scripts\activate
